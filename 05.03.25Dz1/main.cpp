@@ -17,7 +17,7 @@ public:
         : name(n), gender(g), count(c) {}
 
     void print() const {
-        std::cout << "Имя: " << name << ", Пол: " << gender << ", Число: " << count << '\n';
+        std::cout << "Name: " << name << ", Sex: " << gender << ", Choose: " << count << '\n';
     }
 
     bool operator<(const NameRecord& other) const {
@@ -91,7 +91,7 @@ public:
 void loadDataFromFile(const std::string& filename, NameStatistics& stats) {
     std::ifstream file(filename);
     if (!file.is_open()) {
-        std::cerr << "Ошибка открытия файла: " << filename << '\n';
+        std::cerr << "File opening error: " << filename << '\n';
         return;
     }
 
@@ -105,7 +105,6 @@ void loadDataFromFile(const std::string& filename, NameStatistics& stats) {
 }
 
 int main() {
-    setlocale(LC_ALL, "ru");
 
 
     NameStatistics stats;
@@ -113,31 +112,31 @@ int main() {
     loadDataFromFile("russian_names.csv", stats);
 
     auto popular = stats.mostPopular();
-    std::cout << " Самое популярное имя: ";
+    std::cout << "Most popular name : ";
     popular.print();
 
-    auto popularFemale = stats.mostPopularByGender("женский");
-    std::cout << "Самое популярное, женское имя: ";
+    auto popularFemale = stats.mostPopularByGender("female");
+    std::cout << "most popular female name: ";
     popularFemale.print();
 
-    auto popularMale = stats.mostPopularByGender("мужской");
-    std::cout << "Самое популярное, мужское имя: ";
+    auto popularMale = stats.mostPopularByGender("male");
+    std::cout << "most popular male name: ";
     popularMale.print();
 
     int unusedCount = stats.countUnusedNames();
-    std::cout << " Количество неиспользованных имен: " << unusedCount << '\n';
+    std::cout << " Number of unused names: " << unusedCount << '\n';
 
     double median = stats.medianCount();
-    std::cout << "Медианное количество: " << median << '\n';
+    std::cout << " median number: " << median << '\n';
 
     double average = stats.averageCount();
-    std::cout << "Среднее количество: " << average << '\n';
+    std::cout << "Average number: " << average << '\n';
 
     int rareCount = stats.countRareNames(5);
-    std::cout << "Количество редких имен: " << rareCount << '\n';
+    std::cout << "Number of rare names: " << rareCount << '\n';
 
     int commonCount = stats.countCommonNames(50);
-    std::cout << "Количество общих имен: " << commonCount << '\n';
+    std::cout << "Number of common names: " << commonCount << '\n';
 
     return 0;
 }
